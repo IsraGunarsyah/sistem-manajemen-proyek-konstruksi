@@ -16,53 +16,86 @@
     @csrf
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Nama Pekerjaan -->
-        <div>
-            <label for="nama_pekerjaan" class="block text-sm font-semibold text-gray-700">Nama Pekerjaan</label>
-            <input type="text" name="nama_pekerjaan" id="nama_pekerjaan" 
-                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 transition duration-150 ease-in-out bg-[#D9D9D9]"
-                placeholder="Masukkan nama pekerjaan" required>
+        <div class="relative">
+            <label for="nama_pekerjaan" class="block text-sm font-medium text-gray-800">Nama Pekerjaan</label>
+            <div class="flex items-center mt-2">
+                <i class="fas fa-briefcase text-gray-400 mr-3"></i>
+                <input type="text" name="nama_pekerjaan" id="nama_pekerjaan" 
+                    class="block w-full rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 bg-white"
+                    placeholder="Masukkan nama pekerjaan" required>
+            </div>
         </div>
-        
+
+        <!-- Kota -->
+        <div class="relative">
+            <label for="kota" class="block text-sm font-medium text-gray-800">Kota</label>
+            <div class="flex items-center mt-2">
+                <i class="fas fa-city text-gray-400 mr-3"></i>
+                <select name="kota" id="kota" 
+                    class="block w-full rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 bg-white" required>
+                    <option value="" disabled selected>Pilih Kota</option>
+                    <option value="Bontang Utara">Bontang Utara</option>
+                    <option value="Bontang Barat">Bontang Barat</option>
+                    <option value="Bontang Selatan">Bontang Selatan</option>
+                </select>
+            </div>
+        </div>
+
         <!-- Lokasi -->
-        <div>
-            <label for="lokasi" class="block text-sm font-semibold text-gray-700">Lokasi</label>
-            <input type="text" name="lokasi" id="lokasi" 
-                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 transition duration-150 ease-in-out bg-[#D9D9D9]"
-                placeholder="Masukkan lokasi pekerjaan" required>
+        <div class="relative">
+            <label for="lokasi" class="block text-sm font-medium text-gray-800">Lokasi</label>
+            <div class="flex items-center mt-2">
+                <i class="fas fa-map-marker-alt text-gray-400 mr-3"></i>
+                <input type="text" name="lokasi" id="lokasi" 
+                    class="block w-full rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 bg-white"
+                    placeholder="Masukkan lokasi pekerjaan" required>
+            </div>
         </div>
-        
+
         <!-- Deskripsi Pekerjaan -->
-        <div class="md:col-span-2">
-            <label for="deskripsi" class="block text-sm font-semibold text-gray-700">Deskripsi Pekerjaan</label>
-            <textarea name="deskripsi" id="deskripsi" rows="4" 
-                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 transition duration-150 ease-in-out bg-[#D9D9D9]"
-                placeholder="Deskripsikan pekerjaan..."></textarea>
+        <div class="relative md:col-span-2">
+            <label for="deskripsi" class="block text-sm font-medium text-gray-800">Deskripsi Pekerjaan</label>
+            <div class="flex items-center mt-2">
+                <i class="fas fa-pencil-alt text-gray-400 mr-3"></i>
+                <textarea name="deskripsi" id="deskripsi" rows="4" 
+                    class="block w-full rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 bg-white"
+                    placeholder="Deskripsikan pekerjaan..."></textarea>
+            </div>
         </div>
-        
+
         <!-- Tanggal Mulai -->
-        <div>
-            <label for="tanggal_mulai" class="block text-sm font-semibold text-gray-700">Tanggal Mulai</label>
-            <input type="date" name="tanggal_mulai" id="tanggal_mulai" 
-                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 transition duration-150 ease-in-out bg-[#D9D9D9]"
-                required>
+        <div class="relative">
+            <label for="tanggal_mulai" class="block text-sm font-medium text-gray-800">Tanggal Mulai</label>
+            <div class="flex items-center mt-2">
+                <i class="fas fa-calendar-alt text-gray-400 mr-3"></i>
+                <input type="date" name="tanggal_mulai" id="tanggal_mulai" 
+                    class="block w-full rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 bg-white"
+                    required>
+            </div>
         </div>
-        
+
         <!-- SubKontraktor -->
-        <div>
-            <label for="subkontraktor" class="block text-sm font-semibold text-gray-700">SubKontraktor</label>
-            <input type="text" name="subkontraktor" id="subkontraktor" 
-                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 transition duration-150 ease-in-out bg-[#D9D9D9]"
-                placeholder="Masukkan nama subkontraktor">
+        <div class="relative">
+            <label for="subkontraktor" class="block text-sm font-medium text-gray-800">SubKontraktor</label>
+            <div class="flex items-center mt-2">
+                <i class="fas fa-user-tie text-gray-400 mr-3"></i>
+                <input type="text" name="subkontraktor" id="subkontraktor" 
+                    class="block w-full rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 bg-white"
+                    placeholder="Masukkan nama subkontraktor">
+            </div>
         </div>
 
         <!-- Status -->
-        <div>
-            <label for="status" class="block text-sm font-semibold text-gray-700">Status</label>
-            <select name="status" id="status" 
-                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 transition duration-150 ease-in-out bg-[#D9D9D9]" required>
-                <option value="Aktif">Aktif</option>
-                <option value="Tidak Aktif">Tidak Aktif</option>
-            </select>
+        <div class="relative">
+            <label for="status" class="block text-sm font-medium text-gray-800">Status</label>
+            <div class="flex items-center mt-2">
+                <i class="fas fa-check-circle text-gray-400 mr-3"></i>
+                <select name="status" id="status" 
+                    class="block w-full rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 bg-white" required>
+                    <option value="Aktif">Aktif</option>
+                    <option value="Tidak Aktif">Tidak Aktif</option>
+                </select>
+            </div>
         </div>
     </div>
 

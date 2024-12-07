@@ -15,6 +15,7 @@ class Pekerjaan extends Model
     protected $fillable = [
         'nama_pekerjaan',
         'lokasi',
+        'kota',
         'deskripsi',
         'tanggal_mulai',
         'subkontraktor',
@@ -22,15 +23,19 @@ class Pekerjaan extends Model
         'user_id'
     ];
 
+    /**
+     * Relasi dengan model Progress
+     */
     public function progress()
     {
         return $this->hasMany(Progress::class);
     }
 
+    /**
+     * Relasi dengan model User
+     */
     public function user()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
-
-
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

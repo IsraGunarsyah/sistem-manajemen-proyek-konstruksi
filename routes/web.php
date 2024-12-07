@@ -1,25 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\AdminProgressController;
 use App\Http\Controllers\Admin\AdminPekerjaanController;
-use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\PekerjaanController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\RiwayatLaporanController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
-Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+// Dashboard Admin
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');
+
 
 // Halaman dashboard admin
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
@@ -38,6 +39,12 @@ Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users'
 Route::get('/admin/register', [UserController::class, 'create'])->name('admin.registerUser');
 Route::post('/admin/register', [UserController::class, 'store'])->name('admin.registerUser.store');
 
+
+
+// Dashboard User
+Route::get('/user/dashboard', function () {
+    return view('user.dashboard');
+})->name('user.dashboard');
 
 // User routes
 Route::get('/user/login', [UserAuthController::class, 'showLoginForm'])->name('user.login');

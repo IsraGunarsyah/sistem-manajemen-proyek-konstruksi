@@ -3,52 +3,67 @@
 @section('title', 'Tambah Progress')
 
 @section('content')
-<h1 class="text-3xl font-bold text-[#1B1B48] mb-6">Tambah Progress Baru - {{ $pekerjaan->nama_pekerjaan }}</h1>
+<div class="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-xl">
 
-<form method="POST" action="{{ route('user.pekerjaan.simpan-progress', $pekerjaan->id) }}" enctype="multipart/form-data">
-    @csrf
-    <!-- Nama Pekerjaan -->
-    <div class="mb-4">
-        <label for="nama_pekerjaan" class="block text-sm font-medium text-gray-700">Nama Pekerjaan</label>
-        <input type="text" name="nama_pekerjaan" id="nama_pekerjaan" value="{{ $pekerjaan->nama_pekerjaan }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" disabled>
-    </div>
+    <h1 class="text-4xl font-bold text-[#333] text-center mb-8">Tambah Progress Pekerjaan</h1>
 
-    <!-- Lokasi -->
-    <div class="mb-4">
-        <label for="lokasi" class="block text-sm font-medium text-gray-700">Lokasi</label>
-        <input type="text" name="lokasi" id="lokasi" value="{{ $pekerjaan->lokasi }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" disabled>
-    </div>
+    <form method="POST" action="{{ route('user.pekerjaan.simpan-progress', $pekerjaan->id) }}" enctype="multipart/form-data">
+        @csrf
+        <div class="space-y-8">
 
-    <!-- Jenis Pekerjaan -->
-<div class="mb-4">
-    <label for="jenis_pekerjaan" class="block text-sm font-medium text-gray-700">Jenis Pekerjaan</label>
-    <input type="text" name="jenis_pekerjaan" id="jenis_pekerjaan" value="{{ old('jenis_pekerjaan', $pekerjaan->jenis_pekerjaan) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            <!-- Nama Pekerjaan -->
+            <div>
+                <label for="nama_pekerjaan" class="block text-2xl font-semibold text-[#333]">Nama Pekerjaan</label>
+                <input type="text" name="nama_pekerjaan" id="nama_pekerjaan" value="{{ $pekerjaan->nama_pekerjaan }}" class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+            </div>
+
+            <!-- Lokasi -->
+            <div>
+                <label for="lokasi" class="block text-2xl font-semibold text-[#333]">Lokasi</label>
+                <input type="text" name="lokasi" id="lokasi" value="{{ $pekerjaan->lokasi }}" class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+            </div>
+
+            <!-- Jenis Pekerjaan -->
+            <div>
+                <label for="jenis_pekerjaan" class="block text-2xl font-semibold text-[#333]">Jenis Pekerjaan</label>
+                <input type="text" name="jenis_pekerjaan" id="jenis_pekerjaan" value="{{ old('jenis_pekerjaan', $pekerjaan->jenis_pekerjaan) }}" class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+            </div>
+
+            <!-- Jumlah Tiang -->
+            <div>
+                <label for="jumlah_tiang" class="block text-2xl font-semibold text-[#333]">Jumlah Tiang</label>
+                <input type="number" name="jumlah_tiang" id="jumlah_tiang" value="{{ old('jumlah_tiang') }}" class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+            </div>
+
+            <!-- Tanggal dan Waktu Pengerjaan -->
+            <div>
+                <label for="tanggal_waktu_pengerjaan" class="block text-2xl font-semibold text-[#333]">Tanggal dan Waktu Pengerjaan</label>
+                <input type="datetime-local" name="tanggal_waktu_pengerjaan" id="tanggal_waktu_pengerjaan" class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+            </div>
+
+            <!-- Kondisi Cuaca -->
+            <div>
+                <label for="kondisi_cuaca" class="block text-2xl font-semibold text-[#333]">Kondisi Cuaca</label>
+                <input type="text" name="kondisi_cuaca" id="kondisi_cuaca" class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+            </div>
+
+            <!-- Foto Dokumentasi -->
+            <div>
+                <label for="foto" class="block text-2xl font-semibold text-[#333]">Foto Dokumentasi</label>
+                <input type="file" name="foto[]" id="foto" multiple class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+                <input type="file" name="foto[]" id="foto" multiple class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+                <input type="file" name="foto[]" id="foto" multiple class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+                <input type="file" name="foto[]" id="foto" multiple class="mt-4 w-full p-5 border border-[#ddd] rounded-lg bg-white text-xl text-[#333] focus:outline-none focus:ring-2 focus:ring-[#4caf50] focus:border-[#4caf50] transition">
+            </div>
+
+            <!-- Tombol Simpan -->
+            <div class="text-center">
+                <button type="submit" class="w-full py-4 px-8 bg-[#4caf50] text-white font-semibold text-2xl rounded-lg shadow-md transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#388e3c] focus:ring-opacity-50">
+                    Simpan Progress
+                </button>
+            </div>
+
+        </div>
+    </form>
 </div>
-
-
-    <!-- Tanggal Waktu Pengerjaan -->
-    <div class="mb-4">
-        <label for="tanggal_waktu_pengerjaan" class="block text-sm font-medium text-gray-700">Tanggal dan Waktu Pengerjaan</label>
-        <input type="datetime-local" name="tanggal_waktu_pengerjaan" id="tanggal_waktu_pengerjaan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-    </div>
-
-    <!-- Kondisi Cuaca -->
-    <div class="mb-4">
-        <label for="kondisi_cuaca" class="block text-sm font-medium text-gray-700">Kondisi Cuaca</label>
-        <input type="text" name="kondisi_cuaca" id="kondisi_cuaca" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-    </div>
-
-    <!-- Foto Dokumentasi -->
-    <div class="mb-4">
-        <label for="foto" class="block text-sm font-medium text-gray-700">Foto Dokumentasi (Opsional)</label>
-        <input type="file" name="foto[]" id="foto" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-    </div>
-
-    <div class="mt-4">
-        <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">
-            Simpan Progress
-        </button>
-    </div>
-</form>
-
 @endsection

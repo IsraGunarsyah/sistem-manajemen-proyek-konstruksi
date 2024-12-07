@@ -18,45 +18,48 @@ class PekerjaanController extends Controller
     }
 
     // Menangani penyimpanan pekerjaan baru
-   public function store(Request $request)
-{
-    // Validasi inputan
-    $request->validate([
-        'nama_pekerjaan' => 'required|string|max:255',
-        'jenis_pekerjaan' => 'nullable|string|max:255',
-        'lokasi' => 'required|string|max:255',
-        'deskripsi' => 'nullable|string',
-        'tanggal_mulai' => 'required|date',
-        'kondisi_cuaca' => 'nullable|string|max:255',
-        'tanggal_waktu_pengerjaan' => 'nullable|date',
-        'foto' => 'nullable|image|max:2048',
-        'subkontraktor' => 'nullable|string|max:255',
-        'status' => 'required|string|max:50',
-    ]);
+    public function store(Request $request)
+    {
+        // Validasi inputan
+        $request->validate([
+            'nama_pekerjaan' => 'required|string|max:255',
+            'jenis_pekerjaan' => 'nullable|string|max:255',
+            'lokasi' => 'required|string|max:255',
+            'kota' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'tanggal_mulai' => 'required|date',
+            'kondisi_cuaca' => 'nullable|string|max:255',
+            'tanggal_waktu_pengerjaan' => 'nullable|date',
+            'foto' => 'nullable|image|max:2048',
+            'subkontraktor' => 'nullable|string|max:255',
+            'status' => 'required|string|max:50',
+        ]);
 
-    // Upload foto jika ada
-    $fotoPath = null;
-    if ($request->hasFile('foto')) {
-        $fotoPath = $request->file('foto')->store('uploads/pekerjaan', 'public');
+        // Upload foto jika ada
+        $fotoPath = null;
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('uploads/pekerjaan', 'public');
+        }
+
+        // Simpan data pekerjaan ke database
+        Pekerjaan::create([
+            'nama_pekerjaan' => $request->nama_pekerjaan,
+            'jenis_pekerjaan' => $request->jenis_pekerjaan,
+            'lokasi' => $request->lokasi,
+            'kota' => $request->kota,
+            'deskripsi' => $request->deskripsi,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'kondisi_cuaca' => $request->kondisi_cuaca,
+            'tanggal_waktu_pengerjaan' => $request->tanggal_waktu_pengerjaan,
+            'foto' => $fotoPath,
+            'subkontraktor' => $request->subkontraktor,
+            'status' => $request->status,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return redirect()->route('user.pekerjaan.index')->with('success', 'Data pekerjaan berhasil disimpan.');
     }
 
-    // Simpan data pekerjaan ke database
-    Pekerjaan::create([
-        'nama_pekerjaan' => $request->nama_pekerjaan,
-        'jenis_pekerjaan' => $request->jenis_pekerjaan,
-        'lokasi' => $request->lokasi,
-        'deskripsi' => $request->deskripsi,
-        'tanggal_mulai' => $request->tanggal_mulai,
-        'kondisi_cuaca' => $request->kondisi_cuaca,
-        'tanggal_waktu_pengerjaan' => $request->tanggal_waktu_pengerjaan,
-        'foto' => $fotoPath,
-        'subkontraktor' => $request->subkontraktor,
-        'status' => $request->status,
-        'user_id' => auth()->user()->id, // Menyimpan ID pengguna yang sedang login
-    ]);
-    
-    return redirect()->route('user.pekerjaan.index')->with('success', 'Data pekerjaan berhasil disimpan.');
-}
 
 
 public function edit($id)
@@ -103,11 +106,24 @@ public function update(Request $request, $id)
 }
 
 
-public function progressLapangan()
+public function progressLapangan(Request $request)
 {
-    $pekerjaans = Pekerjaan::where('user_id', auth()->user()->id)->get(); // Filter berdasarkan user_id
-    return view('user.pekerjaan.progress-lapangan', compact('pekerjaans'));
+    // Menangani filter kota
+    $kota = $request->input('kota');
+    
+    // Ambil pekerjaan berdasarkan user_id dan kota
+    $pekerjaans = Pekerjaan::where('user_id', auth()->user()->id);
+    
+    if ($kota) {
+        $pekerjaans = $pekerjaans->where('kota', $kota);
+    }
+
+    $pekerjaans = $pekerjaans->get();
+
+    // Kirimkan daftar kota dan pekerjaan yang sesuai ke view
+    return view('user.pekerjaan.progress-lapangan', compact('pekerjaans', 'kota'));
 }
+
 
 
 // Fungsi untuk menampilkan form tambah progress
@@ -127,6 +143,7 @@ public function simpanProgress(Request $request, $id)
         'foto' => 'nullable|array',
         'foto.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5048',
         'jenis_pekerjaan' => 'required|string|max:255',
+        'jumlah_tiang' => 'required|integer|min:1', // Validasi untuk jumlah tiang
     ]);
 
     // Temukan pekerjaan berdasarkan ID
@@ -146,13 +163,15 @@ public function simpanProgress(Request $request, $id)
         'tanggal_waktu_pengerjaan' => $request->tanggal_waktu_pengerjaan,
         'kondisi_cuaca' => $request->kondisi_cuaca,
         'foto' => json_encode($fotoPaths),
-        'jenis_pekerjaan' => $request->jenis_pekerjaan, // Add this line to save the jenis pekerjaan
+        'jenis_pekerjaan' => $request->jenis_pekerjaan,
+        'jumlah_tiang' => $request->jumlah_tiang, // Simpan jumlah tiang
     ]);
 
     // Flash message untuk notifikasi
     return redirect()->route('user.pekerjaan.detail-progress', $pekerjaan->id)
                      ->with('success', 'Progress berhasil ditambahkan.');
 }
+
 
 
 

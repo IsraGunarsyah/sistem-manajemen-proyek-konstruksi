@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Progress extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'pekerjaan_id',
         'tanggal_waktu_pengerjaan',
         'kondisi_cuaca',
         'foto',
         'jenis_pekerjaan',
+        'jumlah_tiang',
         'status',
     ];
 
@@ -26,5 +29,3 @@ class Progress extends Model
         return $this->belongsTo(User::class);
     }
 }
-
-

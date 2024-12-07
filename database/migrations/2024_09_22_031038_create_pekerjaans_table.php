@@ -14,6 +14,7 @@ return new class extends Migration
         $table->id();
         $table->string('nama_pekerjaan');
         $table->string('lokasi');
+        $table->string('kota');
         $table->text('deskripsi')->nullable();
         $table->date('tanggal_mulai');
         $table->string('status');

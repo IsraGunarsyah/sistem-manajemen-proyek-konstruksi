@@ -1,4 +1,3 @@
-<!-- resources/views/admin/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,16 +11,15 @@
     
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/d9247fd719.js" crossorigin="anonymous"></script>
-
 </head>
-<body class="bg-gray-100 h-screen flex flex-col md:flex-row">
+<body class="bg-gray-100 h-screen flex">
     <!-- Sidebar -->
-    <div class="w-64 bg-[#1B1B48] h-full fixed md:relative z-50 transform transition-transform md:translate-x-0" id="sidebar">
+    <div class="w-64 bg-[#1B1B48] h-screen fixed md:relative z-50 transform transition-transform md:translate-x-0 -translate-x-full md:flex-shrink-0" id="sidebar">
         @include('admin.partials.sidebar')
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 p-10">
+    <div class="flex-1 p-6 overflow-y-auto h-full">
         @yield('content')
     </div>
 
@@ -31,7 +29,6 @@
     </button>
 
     <script>
-        
         // Script untuk toggle sidebar di layar mobile
         const sidebar = document.getElementById('sidebar');
         const toggleButton = document.getElementById('toggleSidebar');
@@ -39,10 +36,6 @@
         toggleButton.addEventListener('click', () => {
             sidebar.classList.toggle('-translate-x-full');
         });
-
-
-
-        
     </script>
 </body>
 </html>

@@ -22,7 +22,7 @@
 
     <!-- Tombol Logout -->
     <div class="mt-auto px-4 py-4">
-        <form method="POST" action="{{ route('user.logout') }}">
+        <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button class="w-full bg-blue-500 text-white font-bold py-3 rounded-md focus:outline-none hover:bg-blue-600">
                 Logout
